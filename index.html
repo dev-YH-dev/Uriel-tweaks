@@ -56,7 +56,7 @@
   }
   .brand-mark{
     width: 26px; height: 26px; border-radius: 8px;
-    background: conic-gradient(from 180deg, var(--purple), var(--blue), var(--green), var(--red), var(--purple));
+    background: conic-gradient(from 180deg, var(--purple), var(--purple-2), var(--purple));
     box-shadow: 0 0 16px rgba(178,91,255,0.55);
   }
 
@@ -67,10 +67,10 @@
     border: 1px solid transparent; text-decoration: none; cursor: pointer;
     transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-spring), border-color .2s ease;
   }
-  .btn:focus-visible{ outline: 2px solid var(--blue); outline-offset: 3px; }
+  .btn:focus-visible{ outline: 2px solid var(--purple); outline-offset: 3px; }
   .btn:active{ transform: scale(0.96); transition-duration: .12s; }
   .btn-primary{
-    background: linear-gradient(120deg, var(--purple), var(--purple-2) 55%, var(--blue));
+    background: linear-gradient(120deg, var(--purple), var(--purple-2));
     color: #fff;
     box-shadow: 0 10px 30px -8px rgba(178,91,255,0.65);
   }
@@ -190,13 +190,13 @@
   }
   .pill:hover{ transform: translateY(-2px); }
   .pill.primary{ border-color: var(--purple); color: #d9b8ff; background: color-mix(in srgb, var(--purple) 14%, var(--surface)); }
-  .pill.alt{ border-color: var(--blue); color: #b9dcff; background: color-mix(in srgb, var(--blue) 14%, var(--surface)); }
+  .pill.alt{ border-color: var(--purple); color: #d9b8ff; background: color-mix(in srgb, var(--purple) 14%, var(--surface)); }
 
   .refund{
-    margin-top: 26px; border-left: 3px solid var(--green); padding: 16px 20px;
+    margin-top: 26px; border-left: 3px solid var(--purple); padding: 16px 20px;
     background: var(--surface); border-radius: 0 16px 16px 0;
   }
-  .refund .tag{ color: var(--green); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; display:block; }
+  .refund .tag{ color: var(--purple); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; display:block; }
   .refund p{ color: var(--muted); font-size: 0.93rem; margin-top: 8px; }
 
   /* ---------- cta band ---------- */
@@ -242,7 +242,7 @@
 
     <span class="eyebrow" style="color:var(--purple);"><span class="dot" style="background:var(--purple);"></span>PC &amp; Fortnite performance tuning</span>
     <h1>Your rig is holding back <span class="grad-text">way more FPS</span> than you think.</h1>
-    <p class="lead">We build a custom tweak setup for your exact hardware — no cracked tools, no random registry scripts, no errors left behind. Most clients land in the <strong>150–1000 FPS</strong> range in Fortnite; a better monitor opens up even more.</p>
+    <p class="lead">We build a custom tweak setup for your exact hardware — no cracked tools, no random registry scripts, no errors left behind. Most clients land in the <strong>150–500 FPS</strong> range in Fortnite; with a better monitor, that reaches <strong>500–1000 FPS</strong>.</p>
 
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">Join the Discord to get tuned</a>
@@ -265,7 +265,7 @@
         <span class="graph-title">Frame time · in-game capture</span>
         <span class="legend">
           <span><span class="swatch" style="background:var(--muted)"></span>stock</span>
-          <span><span class="swatch" style="background:var(--green)"></span>tuned</span>
+          <span><span class="swatch" style="background:var(--purple)"></span>tuned</span>
         </span>
       </div>
       <canvas id="graph" width="1000" height="180"></canvas>
@@ -312,17 +312,17 @@
         <div class="v">240<span class="unit">→ 450+</span></div>
         <div class="l">Documented Fortnite case, uncapped</div>
       </div>
-      <div class="stat" style="--accent:var(--red)">
-        <div class="v">150–1000<span class="unit">fps</span></div>
+      <div class="stat" style="--accent:var(--purple)">
+        <div class="v">150–500<span class="unit">fps</span></div>
         <div class="l">Typical range after a full tune</div>
       </div>
-      <div class="stat" style="--accent:var(--green)">
+      <div class="stat" style="--accent:var(--purple)">
         <div class="v">0<span class="unit">errors</span></div>
         <div class="l">Every tweak is Windows-approved</div>
       </div>
-      <div class="stat" style="--accent:var(--blue)">
-        <div class="v">↑<span class="unit">more</span></div>
-        <div class="l">Headroom scales further with a better monitor</div>
+      <div class="stat" style="--accent:var(--purple)">
+        <div class="v">500–1000<span class="unit">fps</span></div>
+        <div class="l">With a better monitor</div>
       </div>
     </div>
   </section>
@@ -432,7 +432,7 @@
     ctx.clearRect(0,0,W,H);
     drawGrid();
     drawLine(seriesStock(90), 'rgba(169,159,199,0.85)', 2);
-    drawLine(seriesTuned(90), '#2be08a', 3);
+    drawLine(seriesTuned(90), '#b25bff', 3);
   }
   render();
 
