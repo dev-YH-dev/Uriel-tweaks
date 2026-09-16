@@ -4,251 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Uriel Tweaks</title>
-<meta name="description" content="Uriel Tweaks builds custom PC tuning setups that unlock hundreds of extra FPS in Fortnite.">
-<style>
-  :root{
-    --bg: #08050f;
-    --surface: #130c22;
-    --surface-2: #1b1233;
-    --border: #2c2049;
-    --text: #f7f4fd;
-    --muted: #a99fc7;
-    --purple: #b25bff;
-    --purple-2: #7c3aed;
-    --red: #ff4d6d;
-    --green: #2be08a;
-    --blue: #4da8ff;
-    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-    --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-    --font-body: 'Manrope', 'Segoe UI', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Consolas', monospace;
-  }
-
-  * { box-sizing: border-box; }
-
-  body{
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  a{ color: inherit; }
-
-  .wrap{ max-width: 1100px; margin-inline: auto; padding-inline: 20px; position: relative; z-index: 1; }
-
-  h1, h2, h3{ font-family: var(--font-display); text-wrap: balance; margin: 0; }
-
-  .num{ font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-
-  /* ---------- header ---------- */
-  header.site{
-    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-    background: rgba(8,5,15,0.78);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-  .site-inner{ display:flex; align-items:center; justify-content:space-between; padding-block: 14px; }
-  .brand{
-    font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
-    display:flex; align-items:center; gap: 9px; letter-spacing: -0.01em;
-  }
-  .brand-mark{
-    width: 26px; height: 26px; border-radius: 8px;
-    background: conic-gradient(from 180deg, var(--purple), var(--purple-2), var(--purple));
-    box-shadow: 0 0 16px rgba(178,91,255,0.55);
-  }
-
-  .btn{
-    display:inline-flex; align-items:center; gap: 8px;
-    font-family: var(--font-body); font-weight: 700; font-size: 0.95rem;
-    padding: 12px 22px; border-radius: 999px;
-    border: 1px solid transparent; text-decoration: none; cursor: pointer;
-    transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-spring), border-color .2s ease;
-  }
-  .btn:focus-visible{ outline: 2px solid var(--purple); outline-offset: 3px; }
-  .btn:active{ transform: scale(0.96); transition-duration: .12s; }
-  .btn-primary{
-    background: linear-gradient(120deg, var(--purple), var(--purple-2));
-    color: #fff;
-    box-shadow: 0 10px 30px -8px rgba(178,91,255,0.65);
-  }
-  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 16px 38px -8px rgba(178,91,255,0.85); }
-  .btn-ghost{
-    background: var(--surface); border-color: var(--border); color: var(--text);
-    font-size: 0.88rem; padding: 9px 16px;
-  }
-  .btn-ghost:hover{ border-color: var(--purple); transform: translateY(-1px); }
-
-  /* ---------- hero ---------- */
-  .hero{ position: relative; padding-block: 70px 46px; overflow: visible; }
-
-  .glow{
-    position: absolute; z-index: 0; border-radius: 50%;
-    filter: blur(70px); opacity: 0.45; pointer-events: none;
-  }
-  .glow-1{ width: 380px; height: 380px; background: var(--purple); top: -140px; left: -100px; opacity: 0.28; }
-  .glow-2{ display: none; }
-  .glow-3{ display: none; }
-
-  .eyebrow{
-    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
-    margin-bottom: 16px; display:inline-flex; align-items:center; gap: 8px;
-    padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
-  }
-  .eyebrow .dot{ width: 6px; height: 6px; border-radius: 50%; }
-
-  .hero h1{
-    font-size: clamp(2.3rem, 5.6vw, 3.8rem); font-weight: 700; letter-spacing: -0.015em;
-  }
-  .grad-text{ color: var(--purple); }
-
-  .hero p.lead{ color: var(--muted); font-size: 1.08rem; max-width: 58ch; margin-top: 18px; }
-
-  .hero-cta{ display:flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-
-  .fps-row{ display:flex; align-items: baseline; gap: 20px; margin-top: 46px; flex-wrap: wrap; }
-  .fps-block{ display:flex; flex-direction: column; }
-  .fps-num{ font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 700; line-height: 1; }
-  .fps-num.before{ color: var(--muted); }
-  .fps-num.after{ color: var(--green); text-shadow: 0 0 26px rgba(43,224,138,0.5); }
-  .fps-label{ font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 6px; }
-  .fps-arrow{ font-size: 1.7rem; color: var(--purple); align-self: center; }
-
-  .graph-card{
-    margin-top: 36px; border: 1px solid var(--border); border-radius: 20px;
-    background: var(--surface); padding: 20px 20px 16px;
-  }
-  .graph-head{ display:flex; justify-content: space-between; align-items:center; margin-bottom: 10px; }
-  .graph-title{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-  .legend{ display:flex; gap:14px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
-  .legend span{ display:inline-flex; align-items:center; gap:6px; }
-  .swatch{ width:10px; height:3px; border-radius:2px; display:inline-block; }
-  canvas#graph{ width: 100%; height: 180px; display:block; }
-
-  /* ---------- sections ---------- */
-  section{ padding-block: 56px; border-top: 1px solid var(--border); position: relative; }
-  .section-head{ max-width: 62ch; margin-bottom: 34px; }
-  .section-head h2{ font-size: clamp(1.6rem, 3.2vw, 2.1rem); margin-top: 10px; }
-  .section-head p{ color: var(--muted); margin-top: 10px; }
-
-  .grid{ display:grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); }
-
-  .card{
-    border: 1px solid var(--border); background: var(--surface);
-    border-radius: 18px; padding: 22px; position: relative; overflow: hidden;
-    transition: transform .4s var(--ease-spring), border-color .3s ease;
-  }
-  .card::before{
-    content:''; position:absolute; top:0; left:0; right:0; height: 3px;
-    background: var(--accent, var(--purple));
-  }
-  .card:hover{ transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent, var(--purple)) 50%, var(--border)); }
-  .card h3{ font-size: 1.02rem; font-weight: 700; margin-top: 8px; }
-  .card p{ color: var(--muted); font-size: 0.92rem; margin-top: 8px; }
-  .card .tag{
-    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em;
-    color: var(--accent, var(--purple)); text-transform: uppercase; font-weight: 700;
-  }
-
-  /* ---------- stats ---------- */
-  .stats{ display:grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-  .stat{
-    border: 1px solid var(--border); border-radius: 18px; padding: 26px 22px;
-    background: var(--surface);
-    transition: transform .4s var(--ease-spring), box-shadow .4s var(--ease-spring);
-  }
-  .stat:hover{ transform: translateY(-4px); box-shadow: 0 18px 34px -18px color-mix(in srgb, var(--accent, var(--purple)) 60%, transparent); }
-  .stat .v{ font-size: 2.2rem; font-weight: 700; color: var(--accent, var(--purple)); }
-  .stat .v .unit{ font-size: 1.1rem; opacity: 0.75; margin-left: 3px; }
-  .stat .l{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 10px; }
-
-  /* ---------- steps ---------- */
-  .steps{ display:grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); }
-  .step{ position: relative; padding-left: 48px; }
-  .step::before{
-    content: attr(data-n);
-    position: absolute; left: 0; top: 0;
-    width: 34px; height: 34px; border-radius: 11px;
-    background: var(--surface); border: 1px solid var(--border);
-    display:flex; align-items:center; justify-content:center;
-    font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem;
-    color: var(--accent, var(--purple));
-    box-shadow: 0 0 0 1px transparent;
-  }
-  .step h3{ font-size: 0.98rem; }
-  .step p{ color: var(--muted); font-size: 0.89rem; margin-top: 6px; }
-
-  /* ---------- payment ---------- */
-  .pay-row{ display:flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
-  .pill{
-    font-family: var(--font-mono); font-size: 0.82rem; padding: 10px 18px;
-    border: 1px solid var(--border); border-radius: 999px; color: var(--text);
-    background: var(--surface); font-weight: 600;
-    transition: transform .3s var(--ease-spring), border-color .2s ease;
-  }
-  .pill:hover{ transform: translateY(-2px); }
-  .pill.primary{ border-color: var(--purple); color: #d9b8ff; background: color-mix(in srgb, var(--purple) 14%, var(--surface)); }
-  .pill.alt{ border-color: var(--purple); color: #d9b8ff; background: color-mix(in srgb, var(--purple) 14%, var(--surface)); }
-
-  .refund{
-    margin-top: 26px; border-left: 3px solid var(--purple); padding: 16px 20px;
-    background: var(--surface); border-radius: 0 16px 16px 0;
-  }
-  .refund .tag{ color: var(--purple); font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; display:block; }
-  .refund p{ color: var(--muted); font-size: 0.93rem; margin-top: 8px; }
-
-  /* ---------- cta band ---------- */
-  .cta-band{ border-top: 1px solid var(--border); padding-block: 72px; text-align:center; position: relative; overflow: hidden; }
-  .cta-band h2{ font-size: clamp(1.7rem, 4.2vw, 2.5rem); }
-  .cta-band p{ color: var(--muted); margin-top: 12px; }
-  .cta-band .hero-cta{ justify-content:center; margin-top: 28px; }
-  .fine{ font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); margin-top: 30px; }
-
-  footer{ border-top: 1px solid var(--border); padding-block: 26px; }
-  .footer-inner{ display:flex; justify-content:space-between; flex-wrap:wrap; gap: 10px; font-size: 0.82rem; color: var(--muted); }
-
-  @keyframes settle-in{ from{ opacity: 0.001; transform: translateY(10px); } to{ opacity: 1; transform: translateY(0); } }
-  .hero .eyebrow{ animation: settle-in .5s var(--ease-spring) both; }
-  .hero h1{ animation: settle-in .55s var(--ease-spring) .05s both; }
-  .hero .lead{ animation: settle-in .55s var(--ease-spring) .1s both; }
-  .hero .hero-cta{ animation: settle-in .55s var(--ease-spring) .15s both; }
-  .hero .fps-row{ animation: settle-in .55s var(--ease-spring) .2s both; }
-  .hero .graph-card{ animation: settle-in .6s var(--ease-spring) .25s both; }
-
-  @media (prefers-reduced-motion: reduce){
-    .btn, .card, .stat, .pill{ transition: none; }
-    .hero .eyebrow, .hero h1, .hero .lead, .hero .hero-cta, .hero .fps-row, .hero .graph-card{ animation: none; }
-    .grad-text{ animation: none; }
-  }
-</style>
+<meta name="description" content="Uriel Tweaks tunes Nvidia PCs for Fortnite, unlocking hundreds of extra FPS with zero errors.">
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 </head>
 <body>
 
 <header class="site">
   <div class="wrap site-inner">
-    <div class="brand"><span class="brand-mark"></span>URIEL TWEAKS</div>
-    <a class="btn btn-ghost" href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">Discord →</a>
+    <a class="brand" href="index.html"><span class="brand-mark"></span>URIEL TWEAKS</a>
+    <nav class="navlinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="services.html">Services</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <a class="btn btn-ghost" href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">Discord →</a>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
   <section class="hero" style="border-top:none;">
     <span class="glow glow-1"></span>
-    <span class="glow glow-2"></span>
-    <span class="glow glow-3"></span>
 
-    <span class="eyebrow" style="color:var(--purple);"><span class="dot" style="background:var(--purple);"></span>PC &amp; Fortnite performance tuning</span>
-    <h1>Your rig is holding back <span class="grad-text">way more FPS</span> than you think.</h1>
-    <p class="lead">We build a custom tweak setup for your exact hardware — no cracked tools, no random registry scripts, no errors left behind. Most clients land in the <strong>150–500 FPS</strong> range in Fortnite; with a better monitor, that reaches <strong>500–1000 FPS</strong>.</p>
+    <span class="eyebrow">Nvidia GPU tuning · Fortnite only</span>
+    <h1>Your Nvidia rig is holding back <span class="grad-text">way more FPS</span> than you think.</h1>
+    <p class="lead">We build a custom tweak setup for your exact Nvidia GPU and Fortnite settings — no cracked tools, no random registry scripts, no errors left behind. Most clients land in the <strong>150–500 FPS</strong> range; with a better monitor, that reaches <strong>500–1000 FPS</strong>.</p>
 
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">Join the Discord to get tuned</a>
+      <a class="btn btn-ghost" href="services.html">See services →</a>
     </div>
 
-    <div class="fps-row" aria-label="Example result: 240 to 500+ FPS">
+    <div class="scope-row">
+      <span class="scope-pill"><span class="chip-dot"></span>Nvidia GPUs only</span>
+      <span class="scope-pill"><span class="chip-dot"></span>Fortnite only</span>
+      <span class="scope-pill"><span class="chip-dot"></span>We never touch or sell your OS</span>
+    </div>
+
+    <div class="fps-row" aria-label="Example result: 240 to 450+ FPS">
       <div class="fps-block">
         <span class="fps-num num before" id="fpsBefore">240</span>
         <span class="fps-label">Before · capped</span>
@@ -274,20 +70,20 @@
 
   <section>
     <div class="section-head">
-      <span class="eyebrow" style="color:var(--purple);"><span class="dot" style="background:var(--purple);"></span>What we actually change</span>
-      <h2>Real tuning, not a mystery .bat file</h2>
-      <p>Every tweak is applied through supported Windows settings and services — nothing that trips Easy Anti-Cheat, nothing that leaves your system unstable.</p>
+      <span class="eyebrow">What we actually change</span>
+      <h2>Real Nvidia &amp; in-game tuning, not a mystery .bat file</h2>
+      <p>Every tweak works within your existing Windows install and Nvidia driver — nothing that trips Easy Anti-Cheat, nothing that touches or replaces your OS.</p>
     </div>
     <div class="grid">
       <div class="card">
-        <span class="tag">Scheduler</span>
-        <h3>GPU &amp; CPU priority</h3>
-        <p>Hardware-accelerated GPU scheduling, MMCSS priority, and core parking tuned so Fortnite gets first call on your hardware.</p>
+        <span class="tag">Nvidia Control Panel</span>
+        <h3>Driver &amp; latency settings</h3>
+        <p>Low Latency Mode, driver version pinning, and a Fortnite-specific 3D settings profile tuned for your exact GPU.</p>
       </div>
       <div class="card">
-        <span class="tag">Power plan</span>
-        <h3>Ultimate performance profile</h3>
-        <p>Custom power plan with parking, throttling, and sleep states disabled for the cores and GPU that matter mid-match.</p>
+        <span class="tag">Scheduler</span>
+        <h3>GPU &amp; CPU priority</h3>
+        <p>Hardware-accelerated GPU scheduling and core parking tuned so Fortnite gets first call on your hardware.</p>
       </div>
       <div class="card">
         <span class="tag">Background load</span>
@@ -304,23 +100,23 @@
 
   <section>
     <div class="section-head">
-      <span class="eyebrow" style="color:var(--purple);"><span class="dot" style="background:var(--purple);"></span>The numbers</span>
+      <span class="eyebrow">The numbers</span>
       <h2>What clients typically see</h2>
     </div>
     <div class="stats">
-      <div class="stat" style="--accent:var(--purple)">
+      <div class="stat">
         <div class="v">240<span class="unit">→ 450+</span></div>
         <div class="l">Documented Fortnite case, uncapped</div>
       </div>
-      <div class="stat" style="--accent:var(--purple)">
+      <div class="stat">
         <div class="v">150–500<span class="unit">fps</span></div>
         <div class="l">Typical range after a full tune</div>
       </div>
-      <div class="stat" style="--accent:var(--purple)">
+      <div class="stat">
         <div class="v">0<span class="unit">errors</span></div>
-        <div class="l">Every tweak is Windows-approved</div>
+        <div class="l">System-safe, every time</div>
       </div>
-      <div class="stat" style="--accent:var(--purple)">
+      <div class="stat">
         <div class="v">500–1000<span class="unit">fps</span></div>
         <div class="l">With a better monitor</div>
       </div>
@@ -329,32 +125,35 @@
 
   <section>
     <div class="section-head">
-      <span class="eyebrow" style="color:var(--purple);"><span class="dot" style="background:var(--purple);"></span>How it works</span>
-      <h2>Four steps, done with you</h2>
+      <span class="eyebrow">Services</span>
+      <h2>Pick the tune that fits your setup</h2>
+      <p>Every tier is scoped to Nvidia GPUs and Fortnite — see the full breakdown and get pricing on Discord.</p>
     </div>
-    <div class="steps">
-      <div class="step" data-n="1">
-        <h3>Message us on Discord</h3>
-        <p>Tell us your specs and what you're currently getting in Fortnite.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="tag">Flagship</span>
+        <h3>Full Nvidia + Fortnite Tune</h3>
+        <p>Nvidia driver &amp; Control Panel, system tuning, network, and a full in-game settings pass — everything, together.</p>
       </div>
-      <div class="step" data-n="2">
-        <h3>Baseline check</h3>
-        <p>We benchmark your current FPS and frame times before touching anything.</p>
+      <div class="card">
+        <span class="tag">Popular</span>
+        <h3>Nvidia GPU Tune</h3>
+        <p>Control Panel profile, Low Latency Mode / Reflex, and a clean driver setup for your exact card.</p>
       </div>
-      <div class="step" data-n="3">
-        <h3>Apply the tweak set</h3>
-        <p>We build and apply a setup matched to your exact hardware.</p>
+      <div class="card">
+        <span class="tag">Add-on</span>
+        <h3>Network &amp; Latency Tune</h3>
+        <p>Nagle's algorithm, NIC offload, QoS, and DNS tuned specifically around Fortnite's traffic pattern.</p>
       </div>
-      <div class="step" data-n="4">
-        <h3>Verify in-game</h3>
-        <p>We confirm the new FPS with you live before we call it done.</p>
-      </div>
+    </div>
+    <div class="hero-cta" style="margin-top: 28px;">
+      <a class="btn btn-ghost" href="services.html">View full service catalog →</a>
     </div>
   </section>
 
   <section>
     <div class="section-head">
-      <span class="eyebrow" style="color:var(--purple);"><span class="dot" style="background:var(--purple);"></span>Payment &amp; refunds</span>
+      <span class="eyebrow">Payment &amp; refunds</span>
       <h2>Simple, flexible payment</h2>
       <p>We mostly get paid in Elite tokens, but we also accept:</p>
     </div>
@@ -374,84 +173,26 @@
   <span class="glow" style="width:340px; height:340px; background:var(--purple); opacity:0.22; top:-120px; left:50%; transform:translateX(-50%);"></span>
   <div class="wrap">
     <h2>Stop leaving FPS on the table.</h2>
-    <p>Join the Discord, send your specs, and we'll tell you exactly what your rig has left to give.</p>
+    <p>Join the Discord, send your GPU and specs, and we'll tell you exactly what your rig has left to give.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">Join the Discord</a>
     </div>
-    <p class="fine">Results vary by hardware, drivers, and in-game settings. Uncapped FPS figures assume a monitor capable of displaying them.</p>
+    <p class="fine">Results vary by hardware, drivers, and in-game settings. Uncapped FPS figures assume a monitor capable of displaying them. Nvidia GPUs and Fortnite only.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap footer-inner">
-    <span>Uriel Tweaks — PC &amp; Fortnite performance tuning</span>
-    <a href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">discord.gg/H5nXbABc3</a>
+    <span>Uriel Tweaks — Nvidia &amp; Fortnite performance tuning</span>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="faq.html">FAQ</a>
+      <a href="https://discord.gg/H5nXbABc3" target="_blank" rel="noopener">discord.gg/H5nXbABc3</a>
+    </div>
   </div>
 </footer>
 
-<script>
-(function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var canvas = document.getElementById('graph');
-  var ctx = canvas.getContext('2d');
-  var W = canvas.width, H = canvas.height;
-
-  function seriesStock(n){
-    var out = []; var v = 55;
-    for (var i=0;i<n;i++){ v += (Math.random()-0.5)*22; v = Math.max(30, Math.min(85, v)); out.push(v); }
-    return out;
-  }
-  function seriesTuned(n){
-    var out = []; var v = 150;
-    for (var i=0;i<n;i++){ v += (Math.random()-0.5)*8; v = Math.max(130, Math.min(170, v)); out.push(v); }
-    return out;
-  }
-  function drawLine(points, color, lw){
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = lw;
-    ctx.lineJoin = 'round';
-    var stepX = W / (points.length - 1);
-    points.forEach(function(p, i){
-      var x = i * stepX;
-      var y = H - p;
-      if (i === 0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-    });
-    ctx.stroke();
-  }
-  function drawGrid(){
-    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-    ctx.lineWidth = 1;
-    for (var i=1;i<4;i++){
-      var y = (H/4)*i;
-      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
-    }
-  }
-  function render(){
-    ctx.clearRect(0,0,W,H);
-    drawGrid();
-    drawLine(seriesStock(90), 'rgba(169,159,199,0.85)', 2);
-    drawLine(seriesTuned(90), '#b25bff', 3);
-  }
-  render();
-
-  var afterEl = document.getElementById('fpsAfter');
-  if (reduce) {
-    afterEl.textContent = '450+';
-  } else {
-    var start = null, dur = 1400, from = 240, to = 450;
-    function step(ts){
-      if (!start) start = ts;
-      var p = Math.min(1, (ts - start) / dur);
-      var eased = 1 - Math.pow(1 - p, 3);
-      var val = Math.round(from + (to - from) * eased);
-      afterEl.textContent = p >= 1 ? '450+' : val;
-      if (p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-})();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
